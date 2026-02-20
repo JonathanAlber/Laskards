@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Systems.Tweening.Core.Data
 {
@@ -35,49 +36,53 @@ namespace Systems.Tweening.Core.Data
                 _ => Linear
             };
         }
-        
+
         public static float Linear(float t) => t;
+
         public static float EaseInQuad(float t) => t * t;
+
         public static float EaseOutQuad(float t) => t * (2f - t);
+
         public static float EaseInOutQuad(float t)
         {
-            return t < 0.5f 
-                ? 2f * t * t 
+            return t < 0.5f
+                ? 2f * t * t
                 : -1f + (4f - 2f * t) * t;
         }
 
         public static float EaseInExpo(float t)
         {
-            return t == 0f 
-                ? 0f 
+            return t == 0f
+                ? 0f
                 : Mathf.Pow(2f, 10f * (t - 1f));
         }
 
         public static float EaseOutExpo(float t)
         {
-            return Mathf.Approximately(t, 1f) 
-                ? 1f 
+            return Mathf.Approximately(t, 1f)
+                ? 1f
                 : 1f - Mathf.Pow(2f, -10f * t);
         }
 
         public static float EaseInOutExpo(float t)
         {
-            if (t == 0f) 
+            if (t == 0f)
                 return 0f;
-            
-            if (Mathf.Approximately(t, 1f)) 
+
+            if (Mathf.Approximately(t, 1f))
                 return 1f;
-            
+
             return t < 0.5f
                 ? Mathf.Pow(2f, 20f * t - 10f) / 2f
                 : (2f - Mathf.Pow(2f, -20f * t + 10f)) / 2f;
         }
 
         public static float EaseInOut(float t) => t * t * (3f - 2f * t);
+
         public static float EaseInOutCubic(float t)
         {
-            return t < 0.5f 
-                ? 4f * t * t * t 
+            return t < 0.5f
+                ? 4f * t * t * t
                 : 1f - Mathf.Pow(-2f * t + 2f, 3f) / 2f;
         }
 
@@ -90,28 +95,28 @@ namespace Systems.Tweening.Core.Data
 
         public static float EaseInElastic(float t)
         {
-            if (t == 0f) 
+            if (t == 0f)
                 return 0f;
-            
-            if (Mathf.Approximately(t, 1f)) 
+
+            if (Mathf.Approximately(t, 1f))
                 return 1f;
-            
+
             const float c4 = 2f * Mathf.PI / 3f;
             return -Mathf.Pow(2f, 10f * t - 10f) * Mathf.Sin((t * 10f - 10.75f) * c4);
         }
 
         public static float EaseOutElastic(float t)
         {
-            if (t == 0f) 
+            if (t == 0f)
                 return 0f;
-            
-            if (Mathf.Approximately(t, 1f)) 
+
+            if (Mathf.Approximately(t, 1f))
                 return 1f;
-            
+
             const float c4 = 2f * Mathf.PI / 3f;
             return Mathf.Pow(2f, -10f * t) * Mathf.Sin((t * 10f - 0.75f) * c4) + 1f;
         }
-        
+
         /// <summary>
         /// Easing out with a bouncing motion.
         /// </summary>
@@ -139,9 +144,6 @@ namespace Systems.Tweening.Core.Data
         /// <summary>
         /// Easing in with a bouncing motion.
         /// </summary>
-        public static float EaseInBounce(float t)
-        {
-            return 1f - EaseOutBounce(1f - t);
-        }
+        public static float EaseInBounce(float t) => 1f - EaseOutBounce(1f - t);
     }
 }

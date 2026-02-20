@@ -20,7 +20,7 @@ namespace UI.Confirmation
 
             if (!manager.TryGetMenu(EMenuIdentifier.Confirmation, out Menu foundMenu))
                 return;
-            
+
             if (foundMenu is ConfirmationMenu confirmationMenu)
                 _menu = confirmationMenu;
             else
@@ -48,7 +48,7 @@ namespace UI.Confirmation
 
             // Await until user confirms or cancels
             bool result = await tcs.Task;
-            
+
             _menu.Hide();
             return result;
         }

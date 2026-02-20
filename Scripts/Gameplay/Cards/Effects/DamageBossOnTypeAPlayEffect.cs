@@ -38,12 +38,14 @@ namespace Gameplay.Cards.Effects
         protected override void OnApply()
         {
             base.OnApply();
+
             PlayerController.OnCardPlayed += HandleCardPlayed;
         }
 
         protected override void OnRevert()
         {
             base.OnRevert();
+
             PlayerController.OnCardPlayed -= HandleCardPlayed;
         }
 

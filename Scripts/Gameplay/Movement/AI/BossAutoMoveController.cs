@@ -62,15 +62,12 @@ namespace Gameplay.Movement.AI
 
         public BossMinimaxSearch Minimax { get; private set; }
 
-        public BossAiEvaluator Evaluator { get; private set; }
-
-        public AiMoveGenerator MoveGenerator { get; private set; }
-
-        public AiUnitValueCalculator UnitValueCalculator { get; private set; }
-
         private GameBoard _board;
-        private UnitTweenController _unitTween;
         private Coroutine _moveRoutine;
+        private BossAiEvaluator _evaluator;
+        private UnitTweenController _unitTween;
+        private AiMoveGenerator _moveGenerator;
+        private AiUnitValueCalculator _unitValueCalculator;
 
         private bool _shouldSkipTurn;
 
@@ -109,11 +106,11 @@ namespace Gameplay.Movement.AI
             ServiceLocator.TryGet(out _unitTween);
 
             ServiceLocator.TryGet(out UnitWorthCalculator worthCalculator);
-            UnitValueCalculator = new AiUnitValueCalculator(worthCalculator.WorthWeights);
+            _unitValueCalculator = new AiUnitValueCalculator(worthCalculator.WorthWeights);
 
-            Evaluator = new BossAiEvaluator(evaluationSettings, UnitValueCalculator);
-            MoveGenerator = new AiMoveGenerator(UnitValueCalculator);
-            Minimax = new BossMinimaxSearch(Evaluator, MoveGenerator, MoveOrderingSettings);
+            _evaluator = new BossAiEvaluator(evaluationSettings, _unitValueCalculator);
+            _moveGenerator = new AiMoveGenerator(_unitValueCalculator);
+            Minimax = new BossMinimaxSearch(_evaluator, _moveGenerator, MoveOrderingSettings);
         }
 
         public void OnPhaseStarted(GameState state, GameFlowSystem flow)
@@ -131,7 +128,7 @@ namespace Gameplay.Movement.AI
                 return;
             }
 
-            if (Evaluator == null)
+            if (_evaluator == null)
             {
                 CustomLogger.LogWarning("Evaluator is null.", this);
                 flow.MarkSubscriberDone(this);

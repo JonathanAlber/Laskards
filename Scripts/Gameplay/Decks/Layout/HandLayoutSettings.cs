@@ -29,9 +29,5 @@ namespace Gameplay.Decks.Layout
         [field: Header("Spacing")]
         [field: Tooltip("Extra horizontal offset per index to avoid perfect overlap.")]
         [field: SerializeField] public float CardSpacing { get; private set; } = 4f;
-
-        [field: Header("Scale")]
-        [field: Tooltip("Resting scale for cards while they live in the hand.")]
-        [field: SerializeField] public Vector3 TargetScale { get; private set; } = Vector3.one;
     }
 }

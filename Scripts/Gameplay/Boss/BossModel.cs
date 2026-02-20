@@ -74,7 +74,7 @@ namespace Gameplay.Boss
         /// </summary>
         /// <param name="amount">Damage to apply.</param>
         /// <returns><c>true</c> if the boss is defeated; otherwise, <c>false</c>.</returns>
-        public bool ApplyDamage(int amount)
+        public void ApplyDamage(int amount)
         {
             if (amount < 0)
                 amount = 0;
@@ -95,8 +95,6 @@ namespace Gameplay.Boss
             }
 
             OnDamageTaken?.Invoke(amount);
-
-            return CurrentHp <= 0;
         }
 
         /// <summary>

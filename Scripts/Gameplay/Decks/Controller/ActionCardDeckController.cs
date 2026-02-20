@@ -6,7 +6,6 @@ using Gameplay.Decks.View;
 using Gameplay.Flow;
 using Gameplay.StarterDecks.Data;
 using Systems.ObjectPooling.Gameplay;
-using UI.Menus.StarterDeck;
 using Utility.Logging;
 
 namespace Gameplay.Decks.Controller

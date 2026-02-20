@@ -13,13 +13,13 @@ namespace Gameplay.Cards.Effects
     /// </summary>
     public sealed class BarrierTileEffect : TileEffect
     {
+        public override bool OccupiesTile => true;
+
         private Barrier _barrierInstance;
 
         public BarrierTileEffect(Tile target, ETeam creatorTeam, EDurationType type, int duration,
             EffectData effectData)
             : base(target, creatorTeam, type, duration, effectData) { }
-
-        public override bool OccupiesTile => true;
 
         protected override void OnApply()
         {

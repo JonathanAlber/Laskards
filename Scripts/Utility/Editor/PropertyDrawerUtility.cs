@@ -49,7 +49,7 @@ namespace Utility.Editor
             int newIndex = EditorGUI.Popup(position, label.text, index, names.ToArray());
 
             // Apply selection
-            property.objectReferenceValue = newIndex == 0 
+            property.objectReferenceValue = newIndex == 0
                 ? null
                 : options[newIndex - 1];
         }

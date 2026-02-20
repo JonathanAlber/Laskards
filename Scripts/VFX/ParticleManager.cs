@@ -7,7 +7,6 @@ using UnityEngine;
 using Utility.Collections;
 using Utility.Logging;
 using VFX.Data;
-
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace VFX

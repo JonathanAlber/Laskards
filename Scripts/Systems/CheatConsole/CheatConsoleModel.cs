@@ -13,9 +13,10 @@ namespace Systems.CheatConsole
     /// </summary>
     public sealed class CheatConsoleModel
     {
-        private readonly Dictionary<string, CheatCommandInfo> commands;
-        private readonly List<string> history;
-        private int historyIndex;
+        private readonly List<string> _history;
+        private readonly Dictionary<string, CheatCommandInfo> _commands;
+
+        private int _historyIndex;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CheatConsoleModel"/> class.
@@ -29,9 +30,9 @@ namespace Systems.CheatConsole
                 return;
             }
 
-            this.commands = new Dictionary<string, CheatCommandInfo>(StringComparer.OrdinalIgnoreCase);
-            history = new List<string>();
-            historyIndex = -1;
+            this._commands = new Dictionary<string, CheatCommandInfo>(StringComparer.OrdinalIgnoreCase);
+            _history = new List<string>();
+            _historyIndex = -1;
 
             foreach (CheatCommandInfo command in commands)
                 RegisterCommand(command);
@@ -40,7 +41,7 @@ namespace Systems.CheatConsole
         /// <summary>
         /// Gets a read-only view of the registered commands.
         /// </summary>
-        public IReadOnlyDictionary<string, CheatCommandInfo> Commands => commands;
+        public IReadOnlyDictionary<string, CheatCommandInfo> Commands => _commands;
 
         /// <summary>
         /// Executes a raw input string as a cheat command.
@@ -50,31 +51,30 @@ namespace Systems.CheatConsole
         public CheatConsoleResult Execute(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
-                return new CheatConsoleResult(false, "No command entered.",
-                    CheatConsoleMessageType.Warning, input);
+                return new CheatConsoleResult("No command entered.",
+                    CheatConsoleMessageType.Warning);
 
             string trimmed = input.Trim();
             AddToHistory(trimmed);
 
             string[] tokens = SplitArguments(trimmed);
             if (tokens.Length == 0)
-                return new CheatConsoleResult(false, "No command entered.",
-                    CheatConsoleMessageType.Warning, trimmed);
+                return new CheatConsoleResult("No command entered.",
+                    CheatConsoleMessageType.Warning);
 
             string commandName = tokens[0];
             string[] arguments = new string[tokens.Length - 1];
             for (int i = 1; i < tokens.Length; i++)
                 arguments[i - 1] = tokens[i];
 
-            if (!commands.TryGetValue(commandName, out CheatCommandInfo commandInfo))
-                return new CheatConsoleResult(false, "Unknown command: " + commandName,
-                    CheatConsoleMessageType.Error, trimmed);
+            if (!_commands.TryGetValue(commandName, out CheatCommandInfo commandInfo))
+                return new CheatConsoleResult("Unknown command: " + commandName,
+                    CheatConsoleMessageType.Error);
 
             try
             {
                 string executionMessage = InvokeCommand(commandInfo, arguments);
-                return new CheatConsoleResult(true, executionMessage, CheatConsoleMessageType.Info,
-                    trimmed);
+                return new CheatConsoleResult(executionMessage, CheatConsoleMessageType.Info);
             }
             catch (TargetParameterCountException exception)
             {
@@ -82,13 +82,12 @@ namespace Systems.CheatConsole
                 string message = $"Command '{commandInfo.Attribute.Command}' called with incorrect number of " +
                                  $"arguments. Try to use it like this:\n{usage}";
 
-                return new CheatConsoleResult(false, message, CheatConsoleMessageType.Warning, trimmed);
+                return new CheatConsoleResult(message, CheatConsoleMessageType.Warning);
             }
             catch (Exception exception)
             {
                 string message = "Command failed: " + exception.Message;
-                return new CheatConsoleResult(false, message, CheatConsoleMessageType.Error,
-                    trimmed);
+                return new CheatConsoleResult(message, CheatConsoleMessageType.Error);
             }
         }
 
@@ -98,17 +97,17 @@ namespace Systems.CheatConsole
         /// <returns>The previous command text, or null if none available.</returns>
         public string GetPreviousHistory()
         {
-            if (history.Count == 0)
+            if (_history.Count == 0)
                 return null;
 
-            if (historyIndex < 0)
-                historyIndex = history.Count;
+            if (_historyIndex < 0)
+                _historyIndex = _history.Count;
 
-            historyIndex--;
-            if (historyIndex < 0)
-                historyIndex = 0;
+            _historyIndex--;
+            if (_historyIndex < 0)
+                _historyIndex = 0;
 
-            return history[historyIndex];
+            return _history[_historyIndex];
         }
 
         /// <summary>
@@ -117,17 +116,17 @@ namespace Systems.CheatConsole
         /// <returns>The next command text, or null if none available.</returns>
         public string GetNextHistory()
         {
-            if (history.Count == 0)
+            if (_history.Count == 0)
                 return null;
 
-            if (historyIndex < 0)
+            if (_historyIndex < 0)
                 return null;
 
-            historyIndex++;
-            if (historyIndex < history.Count)
-                return history[historyIndex];
+            _historyIndex++;
+            if (_historyIndex < _history.Count)
+                return _history[_historyIndex];
 
-            historyIndex = history.Count;
+            _historyIndex = _history.Count;
             return string.Empty;
         }
 
@@ -142,7 +141,7 @@ namespace Systems.CheatConsole
 
             string trimmed = currentInput.Trim();
 
-            foreach (string command in commands.Keys)
+            foreach (string command in _commands.Keys)
             {
                 if (command.StartsWith(trimmed, StringComparison.OrdinalIgnoreCase)
                     && !string.Equals(command, trimmed, StringComparison.OrdinalIgnoreCase))
@@ -169,7 +168,7 @@ namespace Systems.CheatConsole
                 return;
             }
 
-            if (commands.ContainsKey(name))
+            if (_commands.ContainsKey(name))
             {
                 CustomLogger.LogWarning("Command '" + name + "' is already registered.", null);
                 return;
@@ -183,7 +182,7 @@ namespace Systems.CheatConsole
             MethodInfo invokeMethod = action.Method;
             object target = action.Target;
 
-            commands.Add(name, new CheatCommandInfo(attribute, invokeMethod, target));
+            _commands.Add(name, new CheatCommandInfo(attribute, invokeMethod, target));
         }
 
         private static string InvokeCommand(CheatCommandInfo commandInfo, string[] arguments)
@@ -298,14 +297,14 @@ namespace Systems.CheatConsole
                 return;
             }
 
-            if (!commands.TryAdd(command, commandInfo))
+            if (!_commands.TryAdd(command, commandInfo))
                 CustomLogger.LogWarning("Cheat command '" + command + "' is already registered.", null);
         }
 
         private void AddToHistory(string input)
         {
-            history.Add(input);
-            historyIndex = history.Count;
+            _history.Add(input);
+            _historyIndex = _history.Count;
         }
     }
 }

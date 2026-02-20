@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Cards.Data;
 using Gameplay.Cards.Data.Editor;
-using Gameplay.Decks.Data;
 using UnityEditor;
 using Utility.Logging;
 

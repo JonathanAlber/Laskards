@@ -1,7 +1,6 @@
+using Utility;
 using UnityEditor;
-#if !UNITY_EDITOR
 using UnityEngine;
-#endif
 
 namespace UI.Confirmation
 {
@@ -11,15 +10,15 @@ namespace UI.Confirmation
     public class ConfirmedQuitButton : BaseConfirmationButton
     {
         protected override void OnClick() => ShowConfirmationBox();
+
         protected override void OnConfirm() => QuitApplication();
 
         private static void QuitApplication()
         {
-#if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+            if (Platform.IsUnityEditor)
+                EditorApplication.isPlaying = false;
+            else
+                Application.Quit();
         }
     }
 }

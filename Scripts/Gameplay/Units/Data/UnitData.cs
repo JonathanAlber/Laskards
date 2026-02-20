@@ -14,8 +14,5 @@ namespace Gameplay.Units.Data
         [field: SerializeField] public UnitCardState Unit { get; private set; }
 
         [field: SerializeField] public EUnitType UnitType { get; private set; }
-
-        [field: Header("Visuals")]
-        [field: SerializeField] public Sprite UnitSprite { get; private set; }
     }
 }

@@ -13,6 +13,10 @@ namespace Gameplay.Cards.Data.Editor
     /// </summary>
     public static class StarterDeckCardEditorUtils
     {
+        /// <summary>
+        /// Draws a section in the inspector for managing how many copies of the given card are in each starter deck.
+        /// </summary>
+        /// <param name="card">The card to manage in starter decks.</param>
         public static void DrawStarterDeckSection(CardDefinition card)
         {
             List<StarterDeckDefinition> decks = StarterDeckEditorUtils.FindAllStarterDecks();

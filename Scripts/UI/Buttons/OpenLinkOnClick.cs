@@ -9,7 +9,7 @@ namespace UI.Buttons
     public class OpenLinkOnClick : CustomButton
     {
         [SerializeField] private string url = "https://example.com";
-        
+
         protected override void OnClick()
         {
             if (string.IsNullOrEmpty(url))

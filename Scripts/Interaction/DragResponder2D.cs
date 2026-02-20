@@ -11,36 +11,37 @@ namespace Interaction
     [RequireComponent(typeof(Collider2D))]
     public sealed class DragResponder2D : BaseDragResponder
     {
-        private Vector3 offset;
-        private Camera worldCamera;
+        private Vector3 _offset;
+        private Camera _worldCamera;
 
         protected override void Awake()
         {
             base.Awake();
-            worldCamera = Camera.main;
+
+            _worldCamera = Camera.main;
         }
 
         protected override void BeginDragInternal(PointerEventData eventData)
         {
             Vector3 worldPos = ScreenToWorld(eventData.position);
-            offset = transform.position - worldPos;
+            _offset = transform.position - worldPos;
         }
 
         protected override void DragInternal(PointerEventData eventData)
         {
             Vector3 worldPos = ScreenToWorld(eventData.position);
-            transform.position = worldPos + offset;
+            transform.position = worldPos + _offset;
         }
 
         protected override void EndDragInternal(PointerEventData eventData) { }
 
         private Vector3 ScreenToWorld(Vector2 screenPos)
         {
-            Vector3 world = worldCamera.ScreenToWorldPoint
+            Vector3 world = _worldCamera.ScreenToWorldPoint
             (
                 new Vector3(screenPos.x,
                 screenPos.y,
-                -worldCamera.transform.position.z)
+                -_worldCamera.transform.position.z)
             );
 
             return world;

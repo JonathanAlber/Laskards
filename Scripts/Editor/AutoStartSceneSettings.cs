@@ -15,10 +15,7 @@ namespace Editor
         private const string SceneKey = "AutoStartScenePath";
         private const string EnabledKey = "AutoStartSceneEnabled";
 
-        static AutoStartSceneSettings()
-        {
-            EditorApplication.playModeStateChanged += OnPlayModeChanged;
-        }
+        static AutoStartSceneSettings() => EditorApplication.playModeStateChanged += OnPlayModeChanged;
 
         /// <summary>
         /// Sets the scene to be loaded when entering Play mode.
@@ -43,8 +40,8 @@ namespace Editor
         public static SceneAsset GetStartScene()
         {
             string path = EditorPrefs.GetString(SceneKey, string.Empty);
-            return string.IsNullOrEmpty(path) 
-                ? null 
+            return string.IsNullOrEmpty(path)
+                ? null
                 : AssetDatabase.LoadAssetAtPath<SceneAsset>(path);
         }
 
@@ -52,18 +49,12 @@ namespace Editor
         /// Enables or disables the auto start scene feature.
         /// </summary>
         /// <param name="enabled"><c>true</c> to enable, <c>false</c> to disable.</param>
-        public static void SetEnabled(bool enabled)
-        {
-            EditorPrefs.SetBool(EnabledKey, enabled);
-        }
+        public static void SetEnabled(bool enabled) => EditorPrefs.SetBool(EnabledKey, enabled);
 
         /// <summary>
         /// Checks if the auto start scene feature is enabled.
         /// </summary>
-        public static bool IsEnabled()
-        {
-            return EditorPrefs.GetBool(EnabledKey, true);
-        }
+        public static bool IsEnabled() => EditorPrefs.GetBool(EnabledKey, true);
 
         /// <summary>
         /// Called when Unity’s play mode state changes.

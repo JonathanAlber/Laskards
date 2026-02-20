@@ -13,6 +13,12 @@ namespace Systems.CheatConsole
     {
         private static List<CheatCommandInfo> _cachedStaticCommands;
 
+        /// <summary>
+        /// Discovers all cheat commands available in the current context.
+        /// This includes static methods marked with <see cref="CheatCommandAttribute"/> in the executing assembly,
+        /// as well as instance methods on all active and inactive MonoBehaviours in the scene.
+        /// </summary>
+        /// <returns></returns>
         public static List<CheatCommandInfo> DiscoverAllCommands()
         {
             List<CheatCommandInfo> result = new();

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utility.Logging;
 
-namespace Framework
+namespace Managers
 {
     /// <summary>
     /// Generic singleton base class for creating singleton <see cref="MonoBehaviour"/> components.

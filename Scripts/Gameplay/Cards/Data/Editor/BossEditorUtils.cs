@@ -13,12 +13,6 @@ namespace Gameplay.Cards.Data.Editor
 
         static BossEditorUtils() => EditorApplication.projectChanged += ClearCache;
 
-        private static void ClearCache()
-        {
-            _cachedCollection = null;
-            _hasTriedResolve = false;
-        }
-
         /// <summary>
         /// Returns the <see cref="BossCardDefinitionCollection"/> using lazy caching.
         /// Refreshes only if project changes.
@@ -42,6 +36,12 @@ namespace Gameplay.Cards.Data.Editor
             _cachedCollection = AssetDatabase.LoadAssetAtPath<BossCardDefinitionCollection>(path);
 
             return _cachedCollection;
+        }
+
+        private static void ClearCache()
+        {
+            _cachedCollection = null;
+            _hasTriedResolve = false;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Gameplay.Cards.Effects
         EDurationType DurationType { get; }
 
         /// <summary>
-        /// Remaining duration of the effect. 
+        /// Remaining duration of the effect.
         /// Only meaningful for temporary effects.
         /// </summary>
         int RemainingDuration { get; }

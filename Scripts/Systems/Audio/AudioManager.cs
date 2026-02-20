@@ -5,6 +5,7 @@ using Systems.Services;
 using UnityEngine;
 using Utility.Logging;
 using Random = UnityEngine.Random;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Systems.Audio
 {
@@ -73,7 +74,9 @@ namespace Systems.Audio
             audioSource.ignoreListenerPause = soundContainer.ignorePause;
             audioSource.volume = soundContainer.volume;
             audioSource.loop = soundContainer.loop;
-            audioSource.pitch = soundContainer.randomizePitch ? Random.Range(minPitchInclusive, maxPitchInclusive) : 1.0f;
+            audioSource.pitch = soundContainer.randomizePitch
+                ? Random.Range(minPitchInclusive, maxPitchInclusive)
+                : 1.0f;
 
             sources.Add(audioSource);
 
@@ -83,9 +86,10 @@ namespace Systems.Audio
                 audioSource.Play();
 
             if (autoStop)
-                StartCoroutine(ReleaseAudioAfterTime(audioSource, audioSource.clip.length + soundContainer.delay,
+                StartCoroutine(ReleaseAudioAfterTime(audioSource,
+                    audioSource.clip.length + soundContainer.delay,
                     soundContainer.audioType, soundContainer));
-            
+
             return audioSource;
         }
 
@@ -109,10 +113,10 @@ namespace Systems.Audio
                 StopSound(source, soundContainer);
             }
         }
-        
+
         public void StopSound(AudioSource audioSource, AudioContainer audioContainer)
         {
-            if (audioSource == null || !_activeSounds.TryGetValue(audioContainer, out List<AudioSource> sources) 
+            if (audioSource == null || !_activeSounds.TryGetValue(audioContainer, out List<AudioSource> sources)
                                     || !sources.Contains(audioSource))
             {
                 CustomLogger.LogWarning($"Tried stopping {audioContainer.name} but it's not playing.", this);
@@ -187,7 +191,7 @@ namespace Systems.Audio
                 audioSource.volume = targetVolume;
             }
         }
-        
+
         /// <summary>
         /// Gradually fades out an audio source over a specified duration.
         /// </summary>
@@ -208,7 +212,7 @@ namespace Systems.Audio
 
             if (audioSource == null)
                 yield break;
-            
+
             audioSource.Stop();
             audioSource.volume = startVolume; // Reset volume for reuse
         }
@@ -247,7 +251,7 @@ namespace Systems.Audio
                 CustomLogger.LogWarning("Tried changing volume but AudioSource is null.", this);
                 yield break;
             }
-            
+
             float startVolume = audioSource.volume;
             float progress = 0f;
             while (audioSource != null && Mathf.Abs(audioSource.volume - targetVolume) > 0.01f)
@@ -256,7 +260,7 @@ namespace Systems.Audio
                 audioSource.volume = Mathf.Lerp(startVolume, targetVolume, progress);
                 yield return null;
             }
-            
+
             if (audioSource != null)
                 audioSource.volume = targetVolume;
         }
@@ -279,7 +283,8 @@ namespace Systems.Audio
         /// <param name="delay">Time in seconds before the audio source is released.</param>
         /// <param name="audioType">The type of audio being released.</param>
         /// <param name="container">The container from which the audio source originated.</param>
-        private IEnumerator ReleaseAudioAfterTime(AudioSource audioSource, float delay, EAudioType audioType, AudioContainer container)
+        private IEnumerator ReleaseAudioAfterTime(AudioSource audioSource, float delay, EAudioType audioType,
+            AudioContainer container)
         {
             yield return new WaitForSeconds(delay + minimumDelay);
 

@@ -16,12 +16,14 @@ namespace Systems.MenuManaging.Menus
         protected override void OnOpened()
         {
             base.OnOpened();
+
             OnPauseStateChanged?.Invoke(true);
         }
 
         protected override void OnClosed()
         {
             base.OnClosed();
+
             OnPauseStateChanged?.Invoke(false);
         }
     }

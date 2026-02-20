@@ -15,12 +15,6 @@ namespace Gameplay.Cards.Data.Editor
 
         static PlayerCardDefinitionCollectionEditorUtils() => EditorApplication.projectChanged += ClearCache;
 
-        private static void ClearCache()
-        {
-            _cachedCollection = null;
-            _hasTriedResolve = false;
-        }
-
         /// <summary>
         /// Returns the <see cref="PlayerCardDefinitionCollection"/> using lazy caching.
         /// </summary>
@@ -124,6 +118,12 @@ namespace Gameplay.Cards.Data.Editor
 
             EditorUtility.SetDirty(collection);
             AssetDatabase.SaveAssets();
+        }
+
+        private static void ClearCache()
+        {
+            _cachedCollection = null;
+            _hasTriedResolve = false;
         }
     }
 }

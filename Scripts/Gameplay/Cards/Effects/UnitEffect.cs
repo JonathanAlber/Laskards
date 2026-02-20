@@ -16,7 +16,7 @@ namespace Gameplay.Cards.Effects
         /// <returns><c>true</c> if the unit can be attacked; otherwise, <c>false</c>.</returns>
         public virtual bool CanBeAttacked => true;
 
-        public UnitEffect(UnitController target, ETeam creatorTeam, EDurationType durationType, int duration,
+        protected UnitEffect(UnitController target, ETeam creatorTeam, EDurationType durationType, int duration,
             EffectData effectData)
             : base(target, creatorTeam, durationType, duration, effectData) { }
     }

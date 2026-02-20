@@ -74,15 +74,15 @@ namespace Gameplay.Boss.Data.Editor
                 // Remove: enabled if at least one is in the collection
                 using (new EditorGUI.DisabledScope(!anyIn))
                 {
-                    if (GUILayout.Button(selectedBosses.Length == 1 ? "Remove" : "Remove All"))
-                    {
-                        Undo.RecordObject(collection, "Remove BossData from Collection");
+                    if (!GUILayout.Button(selectedBosses.Length == 1 ? "Remove" : "Remove All"))
+                        return;
 
-                        foreach (BossData b in selectedBosses)
-                            BossDataCollectionEditorUtils.RemoveFromCollection(b, collection);
+                    Undo.RecordObject(collection, "Remove BossData from Collection");
 
-                        EditorUtility.SetDirty(collection);
-                    }
+                    foreach (BossData b in selectedBosses)
+                        BossDataCollectionEditorUtils.RemoveFromCollection(b, collection);
+
+                    EditorUtility.SetDirty(collection);
                 }
             }
         }

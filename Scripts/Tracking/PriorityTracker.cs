@@ -24,11 +24,8 @@ namespace Tracking
         public readonly List<TrackedItem<T>> TrackedItems = new();
         private readonly Dictionary<object, TrackedItem<T>> _callerToTracked = new();
         private ulong _orderCounter;
-        
-        public void Initialize()
-        {
-            OnCurrentActiveItemChanged?.Invoke(CurrentTrackedItem);
-        }
+
+        public void Initialize() => OnCurrentActiveItemChanged?.Invoke(CurrentTrackedItem);
 
         /// <summary>
         /// Adds an item with the given priority on behalf of a specific caller.
@@ -153,7 +150,7 @@ namespace Tracking
         {
             if (a is UnityEngine.Object ao && b is UnityEngine.Object bo)
                 return ao == bo;
-            
+
             return EqualityComparer<T>.Default.Equals(a, b);
         }
     }

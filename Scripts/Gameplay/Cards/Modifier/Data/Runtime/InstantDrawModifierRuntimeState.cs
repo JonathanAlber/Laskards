@@ -31,24 +31,16 @@ namespace Gameplay.Cards.Modifier.Data.Runtime
             {
                 case EDeck.ActionDeck:
                 {
-                    if (ServiceLocator.TryGet(out ActionCardDeckController actionDeck))
-                    {
-                        if (!actionDeck.TryDraw(_cardsToDraw))
-                            CustomLogger.LogWarning("Failed to draw cards from Action Deck.", null);
-                    }
+                    if (ServiceLocator.TryGet(out ActionCardDeckController actionDeck) && !actionDeck.TryDraw(_cardsToDraw))
+                        CustomLogger.LogWarning("Failed to draw cards from Action Deck.", null);
                     break;
                 }
-
                 case EDeck.UnitDeck:
                 {
-                    if (ServiceLocator.TryGet(out UnitCardDeckController unitDeck))
-                    {
-                        if (!unitDeck.TryDraw(_cardsToDraw))
-                            CustomLogger.LogWarning("Failed to draw cards from Unit Deck.", null);
-                    }
+                    if (ServiceLocator.TryGet(out UnitCardDeckController unitDeck) && !unitDeck.TryDraw(_cardsToDraw))
+                        CustomLogger.LogWarning("Failed to draw cards from Unit Deck.", null);
                     break;
                 }
-
                 case EDeck.None:
                 case EDeck.Hand:
                 case EDeck.Discard:

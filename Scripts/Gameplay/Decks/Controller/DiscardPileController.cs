@@ -162,10 +162,18 @@ namespace Gameplay.Decks.Controller
             });
         }
 
-        /// <summary>
-        /// Checks if any initial owners of cards in the discard pile are empty, and recycles if so.
-        /// </summary>
-        public void CheckIfInitialOwnersEmpty()
+        protected override void OnCardAdded(CardController card)
+        {
+            base.OnCardAdded(card);
+
+            if (_isReceivingCardFromHand)
+                return;
+
+            if (card.InitialOwner is { CardCount: 0 })
+                RecycleToOriginDecks();
+        }
+
+        private void CheckIfInitialOwnersEmpty()
         {
             int count = Model.Count;
             for (int i = 0; i < count; i++)
@@ -183,17 +191,6 @@ namespace Gameplay.Decks.Controller
                 RecycleToOriginDecks();
                 break;
             }
-        }
-
-        protected override void OnCardAdded(CardController card)
-        {
-            base.OnCardAdded(card);
-
-            if (_isReceivingCardFromHand)
-                return;
-
-            if (card.InitialOwner is { CardCount: 0 })
-                RecycleToOriginDecks();
         }
 
         private void OnPhaseStarted(GameState state)

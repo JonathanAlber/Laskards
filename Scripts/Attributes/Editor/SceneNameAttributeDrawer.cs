@@ -7,15 +7,6 @@ namespace Attributes.Editor
     /// Property drawer for <see cref="SceneNameAttribute"/>.
     /// Displays a dropdown of all scenes included in the Build Settings.
     /// </summary>
-    /// <example>
-    /// <code>
-    /// public class Example : MonoBehaviour
-    /// {
-    ///     [SceneName]
-    ///     public string sceneName;
-    /// }
-    /// </code>
-    /// </example>
     [CustomPropertyDrawer(typeof(SceneNameAttribute))]
     public class SceneNameAttributeDrawer : PropertyDrawer
     {

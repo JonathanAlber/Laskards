@@ -21,7 +21,7 @@ namespace Gameplay.Movement.AI
         private readonly UnitManager _unitManager;
         private readonly PlayerController _playerController;
 
-        public BossAiStateBuilder(GameBoard board, UnitManager unitManager, PlayerController playerController)
+        private BossAiStateBuilder(GameBoard board, UnitManager unitManager, PlayerController playerController)
         {
             _board = board;
             _unitManager = unitManager;

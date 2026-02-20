@@ -24,9 +24,6 @@ namespace Gameplay.Cards.Modifier.Data.Modifiers
 
         public override EActionCategory ActionCategory => EActionCategory.Resource;
 
-        public override ModifierRuntimeState CreateRuntimeState()
-        {
-            return new InstantDrawModifierRuntimeState(this);
-        }
+        public override ModifierRuntimeState CreateRuntimeState() => new InstantDrawModifierRuntimeState(this);
     }
 }

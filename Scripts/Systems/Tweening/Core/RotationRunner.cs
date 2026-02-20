@@ -18,6 +18,7 @@ namespace Systems.Tweening.Core
         protected override void Awake()
         {
             base.Awake();
+
             TweenRunner.OnTweenUpdated += HandleTweenUpdated;
             TweenRunner.OnTweenDeregistered += HandleTweenDeregistered;
         }
@@ -25,6 +26,7 @@ namespace Systems.Tweening.Core
         protected override void OnDestroy()
         {
             base.OnDestroy();
+
             TweenRunner.OnTweenUpdated -= HandleTweenUpdated;
             TweenRunner.OnTweenDeregistered -= HandleTweenDeregistered;
         }

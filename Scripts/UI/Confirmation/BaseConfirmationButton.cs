@@ -26,7 +26,7 @@ namespace UI.Confirmation
             {
                 if (!ServiceLocator.TryGet(out ConfirmationService confirmationService))
                     return;
-                
+
                 ConfirmationRequest confirmationRequest = new(warningText, confirmText, cancelText);
                 if (await confirmationService.ShowConfirmationAsync(confirmationRequest))
                     OnConfirm();

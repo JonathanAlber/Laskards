@@ -19,6 +19,7 @@ namespace Systems.Tweening.Components.UITweens
         protected override void Awake()
         {
             _image = GetComponent<Image>();
+
             base.Awake();
         }
 

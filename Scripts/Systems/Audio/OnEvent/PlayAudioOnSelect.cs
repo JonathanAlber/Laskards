@@ -19,7 +19,7 @@ namespace Systems.Audio.OnEvent
                 CustomLogger.LogWarning("No select sound set for " + gameObject.name, this);
                 return;
             }
-            
+
             if (ServiceLocator.TryGet(out AudioManager audioManager))
                 audioManager.PlaySound(selectSound);
         }

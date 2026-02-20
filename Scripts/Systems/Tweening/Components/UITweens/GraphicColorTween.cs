@@ -20,6 +20,7 @@ namespace Systems.Tweening.Components.UITweens
         protected override void Awake()
         {
             _graphic = GetComponent<Graphic>();
+
             base.Awake();
         }
 

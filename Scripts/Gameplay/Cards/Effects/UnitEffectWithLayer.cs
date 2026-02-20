@@ -13,7 +13,7 @@ namespace Gameplay.Cards.Effects
     {
         public readonly IUnitStatLayer StatLayer;
 
-        public UnitEffectWithLayer(UnitController target, ETeam creatorTeam, EDurationType durationType, int duration,
+        protected UnitEffectWithLayer(UnitController target, ETeam creatorTeam, EDurationType durationType, int duration,
             EffectData effectData, IUnitStatLayer layer)
             : base(target, creatorTeam, durationType, duration, effectData)
         {

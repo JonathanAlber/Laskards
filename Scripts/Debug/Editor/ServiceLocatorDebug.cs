@@ -5,7 +5,7 @@ using UnityEditor;
 namespace Debug.Editor
 {
     /// <summary>
-    /// Validates registered services in the Service Locator when exiting play mode.
+    /// Validates registered services in the <see cref="ServiceLocator"/> when exiting play mode.
     /// </summary>
     [InitializeOnLoad]
     public static class ServiceLocatorDebug
@@ -14,10 +14,10 @@ namespace Debug.Editor
 
         private static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
-            /*if (state != PlayModeStateChange.ExitingPlayMode)
+            if (state != PlayModeStateChange.ExitingPlayMode)
                 return;
 
-            EditorApplication.delayCall += ServiceLocator.ValidateServices;*/
+            EditorApplication.delayCall += ServiceLocator.ValidateServices;
         }
     }
 }

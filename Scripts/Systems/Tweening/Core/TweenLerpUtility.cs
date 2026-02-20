@@ -11,18 +11,17 @@ namespace Systems.Tweening.Core
         /// <summary>
         /// Unclamped linear interpolation for <see cref="float"/>.
         /// </summary>
-        public static float LerpFloatUnclamped(float a, float b, float t)
-        {
-            return a + (b - a) * t;
-        }
+        public static float LerpFloatUnclamped(float a, float b, float t) => a + (b - a) * t;
 
         /// <summary>
         /// Unclamped linear interpolation for <see cref="Vector3"/>.
         /// </summary>
-        public static Vector3 LerpVector3Unclamped(Vector3 a, Vector3 b, float t)
-        {
-            return a + (b - a) * t;
-        }
+        public static Vector3 LerpVector3Unclamped(Vector3 a, Vector3 b, float t) => a + (b - a) * t;
+
+        /// <summary>
+        /// Unclamped linear interpolation for <see cref="Color"/>.
+        /// </summary>
+        public static Color LerpColorUnclamped(Color a, Color b, float t) => a + (b - a) * t;
 
         /// <summary>
         /// Unclamped spherical-linear interpolation for <see cref="Quaternion"/>.
@@ -31,14 +30,6 @@ namespace Systems.Tweening.Core
         public static Quaternion LerpQuaternionUnclamped(Quaternion a, Quaternion b, float t)
         {
             return Quaternion.LerpUnclamped(a, b, t);
-        }
-
-        /// <summary>
-        /// Unclamped linear interpolation for <see cref="Color"/>.
-        /// </summary>
-        public static Color LerpColorUnclamped(Color a, Color b, float t)
-        {
-            return a + (b - a) * t;
         }
     }
 }

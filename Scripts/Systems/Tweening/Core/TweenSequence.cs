@@ -23,6 +23,10 @@ namespace Systems.Tweening.Core
 
         public TweenSequence(ESequenceMode mode) => _mode = mode;
 
+        /// <summary>
+        /// Adds a tween to the sequence.
+        /// </summary>
+        /// <param name="tween">The tween to add.</param>
         public void Add(TweenBase tween)
         {
             if (tween == null)

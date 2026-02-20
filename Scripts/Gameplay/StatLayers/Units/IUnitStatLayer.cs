@@ -2,7 +2,7 @@ namespace Gameplay.StatLayers.Units
 {
     /// <summary>
     /// Represents a pure, stat-transforming layer applied to a unit.
-    /// Layers do not store references to runtime objects and contain 
+    /// Layers do not store references to runtime objects and contain
     /// no timing or state logic—only mathematical modification.
     /// </summary>
     public interface IUnitStatLayer : IStatLayer

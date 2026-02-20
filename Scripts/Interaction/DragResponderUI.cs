@@ -16,6 +16,7 @@ namespace Interaction
         protected override void Awake()
         {
             base.Awake();
+
             _rect = (RectTransform)transform;
         }
 

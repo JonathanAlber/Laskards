@@ -21,6 +21,7 @@ namespace Systems.Tweening.Components.UITweens
         protected override void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
+
             base.Awake();
         }
 

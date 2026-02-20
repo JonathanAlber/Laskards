@@ -1,7 +1,6 @@
-using System;
-using Interaction.Rotation;
-using UnityEngine;
 using Utility;
+using UnityEngine;
+using Interaction.Rotation;
 
 namespace Gameplay.Cards.Interaction
 {
@@ -10,11 +9,6 @@ namespace Gameplay.Cards.Interaction
     /// </summary>
     public sealed class CardFlipper : MonoBehaviour, IRotationNotifiable
     {
-        /// <summary>
-        /// Invoked when the flip state changes. <c>true</c> if front is visible.
-        /// </summary>
-        public event Action<bool> OnFlipStateChanged;
-
         [Header("References")]
         [Tooltip("The front face GameObject of the card.")]
         [SerializeField] private GameObject frontFace;
@@ -41,7 +35,6 @@ namespace Gameplay.Cards.Interaction
             _initialized = true;
             _isBackVisible = showBack;
             ApplyFlip();
-            OnFlipStateChanged?.Invoke(!_isBackVisible);
         }
 
         private void ApplyFlip()

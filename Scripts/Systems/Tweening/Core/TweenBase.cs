@@ -12,30 +12,14 @@ namespace Systems.Tweening.Core
         /// </summary>
         public event Action<TweenBase> OnComplete;
 
-        /// <summary>
-        /// Indicates if the tween is currently running.
-        /// </summary>
         public abstract bool IsRunning { get; }
 
-        /// <summary>
-        /// Indicates if the tween has completed.
-        /// </summary>
         public abstract bool IsCompleted { get; }
 
-        /// <summary>
-        /// Starts the tween.
-        /// </summary>
         public abstract void Start();
 
-        /// <summary>
-        /// Stops the tween.
-        /// </summary>
         public abstract void Stop();
 
-        /// <summary>
-        /// Advances the tween by the given delta time.
-        /// </summary>
-        /// <param name="deltaTime">Time in seconds since the last tick.</param>
         public abstract void Tick(float deltaTime);
 
         /// <summary>

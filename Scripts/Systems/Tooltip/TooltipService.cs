@@ -15,6 +15,7 @@ namespace Systems.Tooltip
         protected override void OnDestroy()
         {
             base.OnDestroy();
+
             _tracker.OnCurrentActiveItemChanged -= OnTooltipChanged;
         }
 

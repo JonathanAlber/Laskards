@@ -25,8 +25,7 @@ namespace Utility.Identification.Editor
             // Support both: private [SerializeField] string uniqueId;
             // And: public string UniqueId { get; private set; }
             // which Unity serializes as <UniqueId>k__BackingField
-            SerializedProperty p = so.FindProperty("uniqueId") 
-                                   ?? so.FindProperty("<UniqueId>k__BackingField");
+            SerializedProperty p = so.FindProperty("uniqueId") ?? so.FindProperty("<UniqueId>k__BackingField");
 
             return p?.stringValue;
         }

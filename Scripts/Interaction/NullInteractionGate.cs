@@ -6,10 +6,15 @@ namespace Interaction
     public sealed class NullInteractionGate : IInteractionGate
     {
         public bool IsTransitioning => false;
+
         public bool IsBeingDragged => false;
+
         public bool AllowDragging => true;
+
         public void SetDragging(bool _) { }
+
         public void StartTransition() { }
+
         public void FinishTransition() { }
     }
 }

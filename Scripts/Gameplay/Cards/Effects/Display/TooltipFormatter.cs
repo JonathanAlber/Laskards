@@ -204,7 +204,7 @@ namespace Gameplay.Cards.Effects.Display
         private static string ParseSegment(string template, ref int index,
             IReadOnlyDictionary<string, object> values, List<string> errors)
         {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
             int length = template.Length;
 
             while (index < length)
@@ -236,7 +236,7 @@ namespace Gameplay.Cards.Effects.Display
         /// </summary>
         private static string ParsePlaceholderContent(string template, ref int index, List<string> errors)
         {
-            StringBuilder content = new StringBuilder();
+            StringBuilder content = new();
             int depth = 1;
             int length = template.Length;
 

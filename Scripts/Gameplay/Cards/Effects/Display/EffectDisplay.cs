@@ -92,13 +92,13 @@ namespace Gameplay.Cards.Effects.Display
             tooltipTrigger.enabled = state;
         }
 
-        private void SetIcon(Sprite icon) => effectIcon.sprite = icon;
-
         private void SetBackground(bool isPermanent)
         {
             backgroundImage.sprite = isPermanent
                 ? permanentEffectBackground
                 : temporaryEffectBackground;
         }
+
+        private void SetIcon(Sprite icon) => effectIcon.sprite = icon;
     }
 }

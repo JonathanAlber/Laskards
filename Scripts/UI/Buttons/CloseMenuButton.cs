@@ -15,7 +15,7 @@ namespace UI.Buttons
         {
             if (!ServiceLocator.TryGet(out MenuManager menuManager))
                 return;
-            
+
             if (menuManager.IsMenuOpen(menuToClose))
                 menuManager.CloseMenu(menuToClose);
         }

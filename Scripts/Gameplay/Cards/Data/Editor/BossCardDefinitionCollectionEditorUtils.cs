@@ -14,12 +14,6 @@ namespace Gameplay.Cards.Data.Editor
 
         static BossCardDefinitionCollectionEditorUtils() => EditorApplication.projectChanged += ClearCache;
 
-        private static void ClearCache()
-        {
-            _cachedCollection = null;
-            _hasTriedResolve = false;
-        }
-
         /// <summary>
         /// Returns the <see cref="BossCardDefinitionCollection"/> using lazy caching.
         /// </summary>
@@ -121,6 +115,12 @@ namespace Gameplay.Cards.Data.Editor
 
             EditorUtility.SetDirty(collection);
             AssetDatabase.SaveAssets();
+        }
+
+        private static void ClearCache()
+        {
+            _cachedCollection = null;
+            _hasTriedResolve = false;
         }
     }
 }
